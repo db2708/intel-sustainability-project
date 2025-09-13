@@ -1,1 +1,162 @@
-/* Add your CSS here */
+
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap');
+
+html, body {
+	margin: 0;
+	padding: 0;
+}
+.title {
+	font-family: 'Audiowide', sans-serif;
+	font-size: 3rem;
+	text-align: center;
+	margin-top: 32px;
+	margin-bottom: 0px;
+}
+.timeline-card h2 {
+	font-family: 'Audiowide', sans-serif;
+	}
+
+.timeline-instructions {
+			font-family: 'Nunito', sans-serif;
+			font-size: 1.5rem;
+			text-align: center;
+			margin-bottom: 4px;
+}
+.timeline-card h3 {
+	font-family: 'Rubik', sans-serif;
+}
+.timeline-card p {
+	font-family: 'Sora', sans-serif;
+}
+
+/* Use Rubik for subheading and card descriptions */
+
+.subheading {
+	font-family: 'Nunito', sans-serif;
+	font-size: 1.75rem;
+  text-align: center;
+	width: 1000px;
+	margin-top: 0px; /* Reduce gap to title */
+}
+/* Header icons in upper left corner */
+.header-icons {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	z-index: 100;
+}
+.intel-logo {
+	width: 100px;
+	height: auto;
+}
+.leaf-icon {
+	width: 48px;
+	height: auto;
+}
+
+body {
+		position: relative;
+		color: #fff;
+		background: #21355b;
+/* Limit background image and gradient to hero section only */
+.hero-section {
+	background:
+		linear-gradient(to bottom, rgba(33,53,91,.5) 0%, rgba(33,53,91,.95) 60%, rgba(33,53,91,1) 90%, rgba(33,53,91,100) 100%),
+		url('img/headquarters.jpeg') no-repeat top center;
+	background-size: 100% auto, 100% auto;
+	background-repeat: no-repeat;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	padding-top: 250px;
+	align-items: center;
+	position: relative;
+	z-index: 2;
+}
+}
+
+h1, h2, h3, p, .description, .year, .quote, .stat {
+	color: #fff !important;
+}
+
+
+/* Center header content vertically and horizontally */
+header > div {
+	display: flex;
+	flex-direction: column;
+	justify-content: center; /* Vertical center */
+	align-items: center;     /* Horizontal center */
+	min-height: 40vh;        /* Take up more vertical space */
+}
+/* Main title style */
+
+
+/* ...existing code... */
+/* 3D Flip Card Effect */
+.timeline-card {
+	perspective: 1000px;
+}
+
+.timeline-card-inner {
+	transform-style: preserve-3d;
+	transition: transform 0.8s;
+}
+
+.timeline-card:hover .timeline-card-inner {
+	transform: rotateY(180deg);
+}
+/* Timeline Flexbox Container */
+.timeline-container {
+	display: flex; /* Use flexbox to arrange cards in a row */
+	flex-direction: row; /* Horizontal layout */
+	overflow-x: auto; /* Enable horizontal scrolling */
+	gap: 16px; /* Space between cards */
+	padding: 0px 0;
+	scroll-behavior: smooth; /* Smooth scrolling */
+}
+
+/* Individual Timeline Card */
+.timeline-card {
+		min-width: 250px; /* Minimum width for each card */
+		border-radius: 8px;
+		border: 2px solid transparent;
+		background: linear-gradient(#833c3c, #3f2222) padding-box,
+					linear-gradient(90deg, cyan, lime) border-box;
+		background-size: 200% 100%;
+		box-shadow: 0 0 10px rgba(0,255,255,0.4), inset 0 0 10px rgba(0,255,255,0.2);
+		padding: 16px;
+		transition: box-shadow 0.5s ease, transform 0.2s, background-position 0.6s ease;
+		position: relative;
+		overflow: hidden;
+}
+
+.timeline-card:hover {
+		box-shadow: 0 0 20px rgba(0,255,255,0.8), inset 0 0 20px rgba(0,255,255,0.4);
+		transform: scale(1.05); /* Slightly enlarge card on hover */
+		background-position: 100% 0;
+}
+
+/* Show horizontal scrollbar if needed */
+.timeline-container::-webkit-scrollbar {
+	height: 8px;
+}
+.timeline-container::-webkit-scrollbar-thumb {
+	background: #b0bec5;
+	border-radius: 4px;
+}
+
+/* Responsive: stack cards vertically on small screens */
+@media (max-width: 600px) {
+	.timeline-container {
+		flex-direction: column;
+		overflow-x: visible;
+		gap: 24px;
+	}
+}
