@@ -153,7 +153,7 @@ header > div {
 	margin: 0 auto 48px auto; /* Center timeline, add space below */
 	box-sizing: border-box;
 	height: 405px; /* Match card height, remove extra space below */
-	scroll-snap-type: x mandatory; /* Enable horizontal scroll snap */
+	scroll-snap-type: mandatory; /* Enable horizontal scroll snap */
 }
 
 /* --- Timeline Card Styles --- */
