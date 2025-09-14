@@ -7,31 +7,373 @@ html, body {
 	margin: 0;
 	padding: 0;
 }
-@media (max-width: 300px) {
-	.timeline-card {
-		width: 90vw;
-		min-width: 0;
-		margin-left: auto;
-		margin-right: auto;
+/* --- General Styles --- */
+.title {
+	font-family: 'Audiowide', sans-serif;
+	font-size: 3rem;
+	text-align: center;
+	margin-top: 32px;
+	margin-bottom: 0px;
+}
+.timeline-card h2 {
+	font-family: 'Audiowide', sans-serif;
+}
+.timeline-instructions {
+	font-family: 'Nunito', sans-serif;
+	font-size: 1.5rem;
+	text-align: center;
+	margin-bottom: 4px;
+}
+.timeline-card h3 {
+	font-family: 'Rubik', sans-serif;
+}
+.timeline-card p {
+	font-family: 'Sora', sans-serif;
+}
+.subheading {
+	font-family: 'Nunito', sans-serif;
+	font-size: 1.75rem;
+	text-align: center;
+	width: 1000px;
+	margin-top: 0px; /* Reduce gap to title */
+}
+
+/* --- Layout and Hero Section --- */
+.circle-shape {
+	width: 121px;
+	height: 121px; /* match width for perfect circle */
+	border: 2px solid #03c7fd; /* same border color */
+	border-radius: 100px; /* makes it a circle */
+	position: relative; /* normal flow, not absolute */
+	margin: 0 auto 0 auto; /* center horizontally, space above */
+	background: rgba(227, 174, 126, 0); /* transparent background */
+	color: rgba(28, 9, 80, 0.75); /* not directly visible unless text inside */
+	z-index: 25;
+	overflow: hidden; /* Hide arrow when outside the circle */
+	transition: box-shadow 0.3s, border-color 0.3s;
+}
+.circle-shape:hover {
+	box-shadow: 0 0 16px 8px rgba(3,199,253,0.35), 0 0 40px 16px rgba(0,255,255,0.18);
+	border-color: cyan;
+}
+.circle-shape img {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	top: -40px;
+	animation: arrowSlide 2.35s ease-in-out infinite;
+}
+
+@keyframes arrowSlide {
+	0% {
+		top: -50px;
+		opacity: 0;
 	}
-	.timeline-container {
-		overflow-x: hidden;
+	20% {
+		top: 0px;
+		opacity: 1;
+	}
+	70% {
+		top: 0px;
+		opacity: 1;
+	}
+	90% {
+		top: 45px;
+		opacity: 0;
+	}
+	100% {
+		top: 45px;
+		opacity: 0;
 	}
 }
-@media (max-width: 320px) {
+
+/* --- Header Icons --- */
+.header-icons {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	z-index: 100;
+}
+.intel-logo {
+	width: 100px;
+	height: auto;
+}
+.leaf-icon {
+	width: 48px;
+	height: auto;
+}
+
+body {
+	position: relative;
+	color: #fff;
+	background: #0d1b2a;
+}
+.hero-section {
+	background:
+		linear-gradient(to bottom, rgba(13, 27, 42,.5) 0%, rgba(13, 27, 42, .95) 60%, rgba(13, 27, 42,1) 90%, rgba(13, 27, 42, 100) 100%),
+		url('img/headquarters.jpeg') no-repeat top center;
+	background-size: 100% auto, 100% auto;
+	background-repeat: no-repeat;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	padding-top: 250px;
+	align-items: center;
+	position: relative;
+	z-index: 2;
+}
+
+h1, h2, h3, p, .description, .year, .quote, .stat {
+	color: #fff !important;
+}
+
+header > div {
+	display: flex;
+	flex-direction: column;
+	justify-content: center; /* Vertical center */
+	align-items: center;     /* Horizontal center */
+	min-height: 40vh;        /* Take up more vertical space */
+}
+
+/* --- Timeline Layout --- */
+.timeline-container {
+	display: flex; /* Use flexbox to arrange cards in a row */
+	flex-direction: row; /* Horizontal layout */
+	align-items: stretch; /* Make cards fill container height */
+	overflow-x: auto; /* Allow horizontal scrolling for cards */
+	overflow-y: hidden; /* Prevent vertical scrolling below cards */
+	gap: 16px; /* Space between cards */
+	padding: 10px 32px 10px 40px; /* Add extra left padding so first card doesn't touch edge */
+	scroll-behavior: smooth; /* Smooth scrolling */
+	max-width: 1235px; /* Show only 4 cards at a time (4*250px + gaps) */
+	margin: 0 auto 48px auto; /* Center timeline, add space below */
+	box-sizing: border-box;
+	height: 405px; /* Match card height, remove extra space below */
+	scroll-snap-type: x mandatory; /* Enable horizontal scroll snap */
+}
+
+/* --- Timeline Card Styles --- */
+.timeline-card {
+	perspective: 1000px;
+	width: 200px;
+	height: 325px; /* Match container height exactly */
+	min-width: 228px;
+	min-height: 325px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: none;
+	box-shadow: none;
+	padding: 0;
+	margin-left: 16px;
+	margin-right: 16px;
+	scroll-snap-align: start; /* Snap each card to the start of the container */
+	position: relative; /* Needed for ::before holographic effect */
+}
+.timeline-card.flipped {
+	margin-left: 40px;
+}
+.timeline-card-inner {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	transform-style: preserve-3d;
+	transition: transform 0.8s;
+}
+.timeline-card:hover .timeline-card-inner {
+	transform: rotateY(180deg) scale(1.05); /* flip + scale together */
+}
+
+/* --- Card Faces --- */
+.timeline-card-front, .timeline-card-back {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	backface-visibility: hidden;
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(0,255,255,0.4), inset 0 0 10px rgba(0,255,255,0.2);
+	background: linear-gradient(#173043, #112133) padding-box,
+		linear-gradient(90deg, #03c7fd, cyan) border-box;
+	background-size: 200% 100%;
+	border: 2px solid transparent;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 16px;
+}
+.timeline-card-front img {
+	width: 100%;
+	border-radius: 8px;
+	margin-bottom: 12px;
+}
+.timeline-card-front h2 {
+	margin-bottom: 0rem; /* Decrease gap between year and title */
+}
+.timeline-card-front h3 {
+	margin-top: 0rem; /* Decrease gap between year and title */
+}
+.timeline-card-back {
+	transform: rotateY(180deg);
+	justify-content: center;
+	align-items: center;
+	background: linear-gradient(#112133, #173043) padding-box,
+		linear-gradient(90deg, #03c7fd, cyan) border-box;
+	color: #fff;
+	text-align: center;
+	font-family: 'Sora', sans-serif;
+	font-size: 1.3rem;
+	padding: 24px;
+	position: relative;
+	overflow: hidden;
+}
+.timeline-card-back p {
+	margin: 0;
+	color: #fff;
+}
+
+/* --- Holographic Effects --- */
+.timeline-card-back::before {
+	content: '';
+	position: absolute;
+	top: -10%;
+	left: -10%;
+	width: 120%;
+	height: 120%;
+	background: linear-gradient(0deg, transparent, transparent 30%, rgba(3,199,253,0.3));
+	transform: rotate(-45deg);
+	transition: all 0.9s ease;
+	opacity: 0;
+	pointer-events: none;
+	z-index: 3;
+}
+.timeline-card.flipped .timeline-card-back:hover::before {
+	opacity: 1;
+	transform: rotate(-45deg) translateY(100%);
+}
+.timeline-card::before {
+	content: '';
+	position: absolute;
+	top: -50%;
+	left: -50%;
+	width: 200%;
+	height: 200%;
+	background: linear-gradient(0deg, transparent, transparent 30%, rgba(3,199,253,0.3));
+	transform: rotate(-45deg);
+	transition: all 0.9s ease;
+	opacity: 0;
+	pointer-events: none;
+	z-index: 3;
+}
+.timeline-card:hover::before {
+	opacity: 1;
+	transform: rotate(-45deg) translateY(100%);
+}
+
+/* --- Overlay for Card Text --- */
+.timeline-card p {
+	opacity: 0;
+	transition: opacity 0.4s;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 90%;
+	background: rgba(13, 27, 42, 0.85);
+	color: #fff;
+	padding: 16px;
+	border-radius: 8px;
+	box-shadow: 0 2px 16px rgba(0,0,0,0.2);
+	z-index: 2;
+	text-align: center;
+	pointer-events: none;
+}
+.timeline-card:hover p {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+/* --- Card Hover Glow --- */
+.timeline-card:hover {
+	box-shadow: 0 0 20px rgba(0,255,255,0.8), inset 0 0 20px rgba(0,255,255,0.4);
+	background-position: 10% 0;
+	/* removed transform: scale(1.05); */
+}
+
+/* --- Scrollbar Styles --- */
+.timeline-container::-webkit-scrollbar {
+	height: 8px;
+}
+.timeline-container::-webkit-scrollbar-thumb {
+	background: #b0bec5;
+	border-radius: 4px;
+}
+
+/* --- Responsive Styles --- */
+@media (max-width: 1000px) {
+	.hero-section {
+		background-size: 600px auto, 600px auto;
+		padding-top: 120px;
+	}
+	.title {
+		font-size: 2.4rem;
+	}
+	.subheading {
+		font-size: 1.3rem;
+		width: 90vw;
+	}
+}
+
+@media (max-width: 600px) {
 	.timeline-container {
-		width: 95vw;
-		max-width: none;
-		margin-left: auto;
-		margin-right: auto;
-		overflow-x: hidden;
-		padding: 0;
+		flex-direction: column;
+		overflow-x: visible;
+		overflow-y: auto;
+		gap: 40px;
+		max-width: 100vw;
+		height: auto;
+		padding: 24px 0;
+		align-items: center;
+		scroll-snap-type: none;
 	}
 	.timeline-card {
-		width: 90vw;
+		width: 80vw;
 		min-width: 0;
-		margin-left: auto;
-		margin-right: auto;
+		height: 510px;
+		margin: 32px auto;
+		scroll-snap-align: none;
+	}
+	.hero-section {
+		background-size: 320px auto, 320px auto;
+		padding-top: 80px; /* Reduce space above title for small screens */
+	}
+	.title {
+		font-size: 2rem;
+	}
+	.subheading {
+		font-size: 1.1rem;
+		width: 95vw;
+	}
+}
+
+@media (max-width: 400px) {
+	.hero-section {
+		background-size: 220px auto, 220px auto;
+		padding-top: 40px;
+	}
+	.title {
+		font-size: 1.3rem;
+	}
+	.subheading {
+		font-size: 0.9rem;
+		width: 90vw;
+	}
+	.timeline-instructions {
+		font-size: 1.1rem;
 	}
 }
 .title {
@@ -252,7 +594,7 @@ header > div {
 	padding: 16px;
 }
 .timeline-card:first-child {
-	padding-left: 80px;
+	padding-left: 0px;
 }
 .timeline-card-front img {
 	width: 100%;
@@ -435,9 +777,24 @@ header > div {
     width: 90vw;
   }
 	.timeline-instructions {
-d		font-size: 1.1rem;
+		font-size: 1.1rem;
 	}
 }
+@media (max-width: 320px) {
+	.timeline-container {
+		height: auto;
+		padding-bottom: 0px;
+	}
+	.timeline-card,
+	.timeline-card.flipped {
+		width: 70vw;
+		min-width: 0;
+	}
+	.timeline-card.flipped {
+		margin-left: 70px;
+	}
+}
+
 
 /* Responsive: adjust title and subheading font sizes for small screens */
 /* ...existing code... */
