@@ -83,6 +83,7 @@ html, body {
 		top: 45px;
 		opacity: 0;
 	}
+}
 
 /* --- Header Icons --- */
 .header-icons {
@@ -256,7 +257,7 @@ header > div {
 .timeline-card-back p {
 	margin: 0;
 	color: #fff;
-	}
+}
 
 	/* RTL text alignment for timeline card backs and three-column card bodies */
 	html[dir="rtl"] .three-column-card p,
