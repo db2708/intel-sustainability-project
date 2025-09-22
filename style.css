@@ -67,8 +67,7 @@ html, body {
 		top: -50px;
 		opacity: 0;
 	}
-	}
-
+	20% {
 		top: 0px;
 		opacity: 1;
 	}
@@ -84,7 +83,6 @@ html, body {
 		top: 45px;
 		opacity: 0;
 	}
-}
 
 /* --- Header Icons --- */
 .header-icons {
@@ -159,8 +157,8 @@ header > div {
 /* --- Timeline Card Styles --- */
 .timeline-card {
 	perspective: 1000px;
-	width: 200px;
-	height: 325px; /* Match container height exactly */
+	width: 70vw !important;
+	height: 400px !important; /* Match container height exactly */
 	min-width: 228px;
 	min-height: 325px;
 	display: flex;
@@ -175,7 +173,7 @@ header > div {
 	position: relative; /* Needed for ::before holographic effect */
 }
 .timeline-card.flipped {
-	margin-left: 40px;
+	margin: 24px auto !important;
 }
 .timeline-card-inner {
 	position: relative;
@@ -258,6 +256,18 @@ header > div {
 .timeline-card-back p {
 	margin: 0;
 	color: #fff;
+	}
+
+	/* RTL text alignment for timeline card backs and three-column card bodies */
+	html[dir="rtl"] .three-column-card p,
+	html[dir="rtl"] .timeline-card-back p,
+	html[dir="rtl"] .timeline-card p {
+		text-align: right;
+	}
+	html[dir="rtl"] .timeline-card p {
+		left: 0;
+		right: auto;
+	}
 }
 
 /* Holographic flash effect on hover */
@@ -328,6 +338,9 @@ header > div {
 	.title {
 		font-size: 2.4rem;
 	}
+html[dir="rtl"] .timeline-card {
+  margin-bottom: 32px;
+}
 	.subheading {
 		font-size: 1.3rem;
 		width: 90vw;
@@ -335,16 +348,43 @@ header > div {
 }
 
 /* Make timeline and three-column sections full width on small screens */
-@media (max-width: 575px) {
+@media (max-width: 320px) {
 	.timeline-container {
+	html[dir="rtl"] .timeline-card.flipped {
+		width: 50vw;
+		min-width: 0;
+		max-width: 300px;
+		height: 510px;
+		margin-left: 0;
+		margin-right: 0;
+		margin: 32px auto;
+	}
 		max-width: 100px;
 		font-size: 0.8rem;
 		padding-left: 0;
 		padding-right: 0;
+	html[dir="rtl"] .timeline-card.flipped {
+		width: 95vw;
+		min-width: 0;
+		max-width: 320px;
+		height: 510px;
+		margin-left: 0;
+		margin-right: 0;
+		margin: 24px auto;
+	}
 		font-size: 0.8rem;
 		margin-right: 0;
 	}
 	.three-column-section {
+	html[dir="rtl"] .timeline-card.flipped {
+		width: 98vw;
+		min-width: 0;
+		max-width: 280px;
+		height: 510px;
+		margin-left: 0;
+		margin-right: 0;
+		margin: 16px auto;
+	}
 		max-width: 100vw;
 		width: 100vw;
 		margin-left: 0;
@@ -397,6 +437,50 @@ header > div {
 
 @media (max-width: 400px) {
 	.hero-section {
+
+	html[dir="rtl"] .timeline-container {
+		flex-direction: column;
+		align-items: center;
+		height: auto;
+		max-width: 100vw;
+		overflow-x: visible;
+		overflow-y: auto;
+		gap: 40px;
+		padding: 24px 0;
+		scroll-snap-type: none;
+	}
+	html[dir="rtl"] .timeline-card {
+		width: 80vw;
+		min-width: 0;
+		height: 510px;
+		margin: 32px auto;
+		scroll-snap-align: none;
+	}
+	html[dir="rtl"] .timeline-card.flipped {
+		margin-left: 90px;
+	}
+
+	html[dir="rtl"] .timeline-container {
+		flex-direction: column;
+		align-items: center;
+		height: auto;
+		max-width: 100vw;
+		overflow-x: visible;
+		overflow-y: auto;
+		gap: 40px;
+		padding: 24px 0;
+		scroll-snap-type: none;
+	}
+	html[dir="rtl"] .timeline-card {
+		width: 80vw;
+		min-width: 0;
+		height: 510px;
+		margin: 32px auto;
+		scroll-snap-align: none;
+	}
+	html[dir="rtl"] .timeline-card.flipped {
+		margin-left: 90px;
+	}
 		background-size: 220px auto, 220px auto;
 		padding-top: 40px;
 	}
@@ -686,6 +770,11 @@ header > div {
 	transform: rotate(-45deg) translateY(100%);
 }
 
+html[dir="rtl"] .timeline-card::before,
+html[dir="rtl"] .timeline-card-back::before {
+  display: none !important;
+}
+
 .timeline-card-back p {
 	margin: 0;
 	color: #fff;
@@ -779,6 +868,26 @@ header > div {
 	.timeline-card-back::before {
 		display: none !important;
 	}
+
+  html[dir="rtl"] .timeline-container {
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    max-width: 100vw;
+    overflow-x: hidden;
+    overflow-y: auto;
+    gap: 40px;
+    padding: 24px 0;
+    scroll-snap-type: none;
+  }
+  html[dir="rtl"] .timeline-card {
+    width: 80vw;
+    min-width: 0;
+    max-width: 400px;
+    margin: 32px auto;
+    height: 510px;
+    scroll-snap-align: none;
+  }
 }
 
 /* Responsive: set minimum width for headquarters.jpeg background on small screens */
@@ -885,10 +994,10 @@ header > div {
 	margin-bottom: 0rem;
 }
 .three-column-card p {
-		font-family: 'Sora', sans-serif;
-		color: #fff;
-		text-align: center;
-		font-size: 1.1rem;
+	font-family: 'Sora', sans-serif;
+	color: #fff;
+	font-size: 1.1rem;
+	text-align: center;
 }
 
 .learn-more {
@@ -912,7 +1021,22 @@ header > div {
 	width: 165px;
 	height: 60px;
 	box-sizing: border-box;
+	 position: relative;
+	 overflow: hidden;
 }
+	.learn-more::after {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: -75%;
+		width: 50%;
+		height: 100%;
+		background: rgba(255,255,255,0.2);
+		transform: skewX(-25deg);
+	}
+	.learn-more:hover::after {
+		animation: shine 0.7s forwards;
+	}
 
 .subscribe-btn {
 	font-family: 'Nunito', sans-serif;
@@ -927,8 +1051,8 @@ header > div {
 	font-size: 1.15rem;
 	border: 2px solid transparent;
 	background-image:
-		linear-gradient(#173043, #112133),
-		linear-gradient(90deg, #03c7fd, cyan);
+			linear-gradient(#173043, #112133),
+			linear-gradient(90deg, #03c7fd, cyan);
 	background-origin: border-box;
 	background-clip: padding-box, border-box;
 	transition: background 0.3s, box-shadow 0.3s, transform 0.2s;
@@ -936,7 +1060,25 @@ header > div {
 	height: 60px;
 	box-sizing: border-box;
 	text-align: center;
-}
+	position: relative;
+	overflow: hidden;
+	}
+	.subscribe-btn::after {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: -75%;
+		width: 50%;
+		height: 100%;
+		background: rgba(255,255,255,0.2);
+		transform: skewX(-25deg);
+	}
+	.subscribe-btn:hover::after {
+		animation: shine 0.7s forwards;
+	}
+	@keyframes shine {
+		to { left: 125%; }
+	}
 
 .email-input-custom {
 	font-family: 'Nunito', sans-serif;
@@ -972,65 +1114,111 @@ header > div {
 	transition: transform 0.2s, background 0.3s, box-shadow 0.3s;
 }
 
-  /* Center body text in cards and boxes for LTR */
-  .three-column-card p, .timeline-card p, .timeline-card-back p {
-      text-align: center;
-    }
-    /* --- RTL Text Alignment Fix --- */
-      
-    /* Align body text in cards and instructions to the right */
-		/* For RTL languages, align card and overlay text to the right */
-		/* Right-align timeline and three-column card text for RTL */
-		html[dir="rtl"] .three-column-card p,
-		html[dir="rtl"] .timeline-card-back p,
-		html[dir="rtl"] .timeline-card p {
-			text-align: right; /* Right-align body text in cards for RTL */
-		}
+/* RTL: stack timeline cards vertically on screens below 600px */
+@media (max-width: 600px) {
+  html[dir="rtl"] .timeline-container {
+    flex-direction: column !important;  /* stack cards vertically */
+    align-items: center;                 /* center horizontally */
+    overflow-x: hidden;                  /* hide horizontal scroll */
+    overflow-y: auto;                    /* enable vertical scroll */
+    gap: 40px;                           /* space between stacked cards */
+    height: auto;                        /* let container grow with content */
+    padding: 24px 0;                     /* top/bottom padding */
+    scroll-snap-type: none;              /* disable horizontal snapping */
+  }
 
-		/* For RTL, overlay text in timeline cards should be positioned from the left */
-		html[dir="rtl"] .timeline-card p {
-			left: 0;
-			right: auto;
-			transform: translate(0, -50%);
-		}
+  html[dir="rtl"] .timeline-card {
+    width: 80vw;                         /* card width */
+    min-width: 0;
+    max-width: 400px;                     /* optional max width */
+    height: 510px;                        /* maintain height */
+    margin: 0 auto;                       /* center each card */
+    scroll-snap-align: none;              /* disable snapping */
+    margin-left: 0 !important;            /* remove flipped offset */
+    z-index: 20;                          /* normal stacking */
+  }
 
-		/* Always centered elements in RTL */
-		html[dir="rtl"] .title,
-		html[dir="rtl"] .subheading,
-		html[dir="rtl"] .timeline-instructions,
-		html[dir="rtl"] .three-column-card .learn-more,
-		html[dir="rtl"] .nunito-heading,
-		html[dir="rtl"] footer {
-			text-align: center !important;
-		}
+  html[dir="rtl"] .timeline-card.flipped {
+    z-index: 50;                          /* keep flipped card on top */
+  }
+}
 
-		/* For RTL, overlay text in timeline cards should be right-aligned and positioned from the left */
-		html[dir="rtl"] .timeline-card p {
-			left: 0;
-			right: auto;
-			transform: translate(0, -50%);
-			text-align: right !important;
-		}
-		/* For RTL, instructions above timeline should be right-aligned */
-		html[dir="rtl"] .timeline-instructions {
-			text-align: right !important;
-		}
-    
-    /* Keep headings centered even in RTL */
-    html[dir="rtl"] .title,
-    html[dir="rtl"] .subheading,
-    html[dir="rtl"] .three-column-card h2,
-    html[dir="rtl"] .nunito-heading,
-    html[dir="rtl"] footer {
-        text-align: center !important;
-    }
-    
-    /* Flip timeline container for RTL scrolling */
-    html[dir="rtl"] .timeline-container {
-        direction: rtl;
-    }
-    
-    /* Adjust flip animation origin for RTL cards */
-    html[dir="rtl"] .timeline-card-inner {
-        transform-origin: right center;
-    }
+
+html[dir="rtl"] body {
+  text-align: right;
+  font-family: 'Sora', sans-serif;
+}
+
+/* Hero Section */
+html[dir="rtl"] .title,
+html[dir="rtl"] .subheading {
+  text-align: center;
+}
+
+/* Three-column section text */
+html[dir="rtl"] .three-column-card p {
+  text-align: right;
+}
+
+/* Three-column card heading icon on right */
+html[dir="rtl"] .three-column-card h2 {
+  display: flex;
+  flex-direction: row-reverse; /* icon after text */
+  align-items: center;
+  justify-content: center;
+  gap: 8px; /* space between text and icon */
+}
+
+/* Timeline container flows RTL */
+html[dir="rtl"] .timeline-container {
+  direction: rtl;
+  flex-direction: row-reverse;
+}
+
+/* Timeline card content alignment */
+html[dir="rtl"] .timeline-card h2,
+html[dir="rtl"] .timeline-card h3,
+html[dir="rtl"] .timeline-card p {
+  text-align: right;
+}
+
+/* Timeline card description positioning */
+html[dir="rtl"] .timeline-card p {
+  left: 0;
+  right: auto;
+  transform: translate(0, -50%);
+}
+
+/* Timeline card back text fix (stop centering) */
+html[dir="rtl"] .timeline-card-back {
+  display: block;
+  text-align: right;
+}
+
+/* Timeline cards: keep flip direction the same in RTL */
+html[dir="rtl"] .timeline-card-inner {
+  transform-origin: center center; /* flip same as LTR */
+}
+
+/* Flipped timeline card should appear on top */
+html[dir="rtl"] .timeline-card.flipped {
+  z-index: 50;
+  margin-left: -30px;
+
+html[dir="rtl"] .timeline-card:hover {
+	z-index: 99 !important;
+}
+}
+
+/* Keep subscribe button, email input, and footer layout unchanged */
+html[dir="rtl"] .email-input-custom,
+html[dir="rtl"] .subscribe-btn,
+html[dir="rtl"] footer {
+	text-align: center;  /* footer text remains centered */
+	direction: ltr;      /* keep input/button layout unchanged */
+}
+html[dir="rtl"] form.d-flex {
+	direction: ltr; /* Force LTR direction for the newsletter form */
+}
+
+
